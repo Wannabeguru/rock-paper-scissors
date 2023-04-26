@@ -22,17 +22,17 @@ function playRound(playerSelection, computerSelection) {
     const outcomes = {
         rock: {
             rock: 'Tie!',
-            paper: 'You lose! Paper beats rock!',
-            scissors: 'You win! Scissors beats paper!',
+            paper: 'You lose!',
+            scissors: 'You win!',
         },
         paper: {
-            rock: 'You win! Paper beats rock!',
+            rock: 'You win!',
             paper: 'Tie!',
-            scissors: 'You win! Scissors beats paper!',
+            scissors: 'You win!',
         },
         scissors:{
-            rock: 'You lose! Rock beats scissors!',
-            paper: 'You win! Scissors beats paper!',
+            rock: 'You lose!',
+            paper: 'You win!',
             scissors: 'Tie!'
         }
 
@@ -41,4 +41,36 @@ function playRound(playerSelection, computerSelection) {
     return outcomes[playerSelection][computerSelection];
 }
 
-console.log(playRound('paper',getComputerChoice()))
+const computerSelection = getComputerChoice()
+
+
+//Function to play the game 5 times.
+function game() {
+    let playerScore = 0
+    let computerScore = 0
+    while (playerScore < 3 && computerScore < 3 ){
+        const user_input = prompt('Choose from rock, paper, or scissors!')
+        result = playRound(user_input, computerSelection)
+        switch (result) {
+            case 'You win!':
+                playerScore += 1
+                break;
+
+            case 'You lose!':
+                computerScore += 1
+                break;
+            
+            case 'Tie!':
+                continue;
+
+        }
+        
+        
+
+    }
+    
+    winner = playerScore === 3 ? 'Player wins!' : 'Computer Wins!'
+    console.log(winner)
+}
+
+console.log(game())
