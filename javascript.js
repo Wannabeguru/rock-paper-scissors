@@ -4,21 +4,38 @@ function getComputerChoice (){
     const randomNumber = Math.floor(Math.random() * 3);
         switch (randomNumber){
             case 0:
-                return 'Rock';
+                return 'rock';
             case 1:
-                return 'Paper';
+                return 'paper';
             case 2:
-                return 'Scissors'
-
+                return 'scissors';
         }
-
 }
+
+const allButtons = document.querySelectorAll('button');
+
+let playerSelection;
+
+allButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        playerSelection = button.textContent.toLowerCase();
+        console.log(playerSelection);
+
+        const computerSelection = getComputerChoice().toLowerCase();
+        console.log('Computers choice:', computerSelection);
+
+        const result = playRound(playerSelection, computerSelection);
+        console.log(result);
+
+
+    });
+});
+
+
+
 
 //Function that plays one round of the game.
 function playRound(playerSelection, computerSelection) {
-    playerSelection = playerSelection.toLowerCase();
-    computerSelection = computerSelection.toLowerCase();
-    
     const outcomes = {
         rock: {
             rock: 'Tie!',
@@ -28,7 +45,7 @@ function playRound(playerSelection, computerSelection) {
         paper: {
             rock: 'You win!',
             paper: 'Tie!',
-            scissors: 'You win!',
+            scissors: 'You lose!',
         },
         scissors:{
             rock: 'You lose!',
@@ -37,15 +54,14 @@ function playRound(playerSelection, computerSelection) {
         }
 
     };
-
     return outcomes[playerSelection][computerSelection];
 }
 
-const computerSelection = getComputerChoice()
+
 
 
 //Function to play the game 5 times.
-function game() {
+/*function game() {
     let playerScore = 0
     let computerScore = 0
     while (playerScore < 3 && computerScore < 3 ){
@@ -71,6 +87,13 @@ function game() {
     
     winner = playerScore === 3 ? 'Player wins!' : 'Computer Wins!'
     console.log(winner)
-}
+}*/
 
-console.log(game())
+
+    
+
+
+
+
+
+
