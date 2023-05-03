@@ -11,11 +11,10 @@ function getComputerChoice (){
                 return 'scissors';
         }
 }
-
 const allButtons = document.querySelectorAll('button');
-
-let playerSelection;
-
+const addSpan = document.getElementById('winner');
+/*Assigns an event listener to every button.
+Plays a round declaring a winner onclick.*/
 allButtons.forEach((button) => {
     button.addEventListener('click', () => {
         playerSelection = button.textContent.toLowerCase();
@@ -24,16 +23,14 @@ allButtons.forEach((button) => {
         const computerSelection = getComputerChoice().toLowerCase();
         console.log('Computers choice:', computerSelection);
 
-        const result = playRound(playerSelection, computerSelection);
-        console.log(result);
-
+        const winner= playRound(playerSelection, computerSelection);
+        
+       
+        //adds winner into a div
+        addSpan.textContent = winner;
 
     });
 });
-
-
-
-
 //Function that plays one round of the game.
 function playRound(playerSelection, computerSelection) {
     const outcomes = {
@@ -56,10 +53,6 @@ function playRound(playerSelection, computerSelection) {
     };
     return outcomes[playerSelection][computerSelection];
 }
-
-
-
-
 //Function to play the game 5 times.
 /*function game() {
     let playerScore = 0
@@ -88,12 +81,3 @@ function playRound(playerSelection, computerSelection) {
     winner = playerScore === 3 ? 'Player wins!' : 'Computer Wins!'
     console.log(winner)
 }*/
-
-
-    
-
-
-
-
-
-
