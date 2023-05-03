@@ -15,22 +15,38 @@ const allButtons = document.querySelectorAll('button');
 const addSpan = document.getElementById('winner');
 /*Assigns an event listener to every button.
 Plays a round declaring a winner onclick.*/
-allButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-        playerSelection = button.textContent.toLowerCase();
-        console.log(playerSelection);
 
-        const computerSelection = getComputerChoice().toLowerCase();
-        console.log('Computers choice:', computerSelection);
+function playOnButton(){
+    let playerScore = 0;
+    let computerScore = 0;
 
-        const winner= playRound(playerSelection, computerSelection);
+    allButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            playerSelection = button.textContent.toLowerCase();
+            //console.log(playerSelection);
+
+            const computerSelection = getComputerChoice().toLowerCase();
+            //console.log('Computers choice:', computerSelection);
+
+            const winner= playRound(playerSelection, computerSelection);
+            
         
-       
-        //adds winner into a div
-        addSpan.textContent = winner;
+            //adds winner into a div
+            addSpan.textContent = winner;
 
+            if (winner === 'You win!') {
+                playerScore++;
+                document.getElementById('counterPlayer').textContent = playerScore;
+              } else if (winner === 'You lose!') {
+                computerScore++;
+                document.getElementById('counterComputer').textContent = computerScore;
+              }
+
+        });
     });
-});
+}
+
+
 //Function that plays one round of the game.
 function playRound(playerSelection, computerSelection) {
     const outcomes = {
@@ -53,31 +69,38 @@ function playRound(playerSelection, computerSelection) {
     };
     return outcomes[playerSelection][computerSelection];
 }
+
+
+
 //Function to play the game 5 times.
-/*function game() {
+/*function updateScore() {
+    const addPlayerWin = document.getElementById('counterPlayer')
+    const addComputerWin = document.getElementById('counterComputer')
+
     let playerScore = 0
     let computerScore = 0
-    while (playerScore < 3 && computerScore < 3 ){
-        const user_input = prompt('Choose from rock, paper, or scissors!')
-        result = playRound(user_input, computerSelection)
-        switch (result) {
-            case 'You win!':
-                playerScore += 1
-                break;
 
-            case 'You lose!':
-                computerScore += 1
-                break;
-            
-            case 'Tie!':
-                continue;
-
-        }
-        
-        
-
+    result = playRound()
+    switch (result) {
+        case 'You win!':
+            playerScore += 1
+            break;
+        case 'You lose!':
+            computerScore += 1
+            break;
+        case 'Tie!':
+            break;
     }
+
+
+   console.log(playerScore);
     
-    winner = playerScore === 3 ? 'Player wins!' : 'Computer Wins!'
-    console.log(winner)
-}*/
+
+
+
+}
+*/
+
+
+playOnButton();
+//updateScore();
