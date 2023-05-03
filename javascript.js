@@ -41,6 +41,21 @@ function playOnButton(){
                 computerScore++;
                 document.getElementById('counterComputer').textContent = computerScore;
               }
+            
+            if (playerScore === 5 || computerScore === 5) {
+                let winnerMessage;
+                if (playerScore > computerScore) {
+                    winnerMessage = 'Congrajulations, you win!';
+                } else {
+                    winnerMessage = 'Sorry, you lose!';
+                
+                }
+                addSpan.textContent = `${winnerMessage} Final Score: ${playerScore} - ${computerScore}`;
+                allButtons.forEach((button) => {
+                    button.removeEventListener('click', playOnButton);
+                });
+            }
+
 
         });
     });
